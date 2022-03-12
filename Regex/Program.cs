@@ -11,13 +11,8 @@ namespace RegexApp
         public static void Main()
         {
             Console.WriteLine("--------** User Registration **--------");
-            User_Registration user  = new User_Registration();  
-            if (user.validateFirstName("Abin"))
-            {
-                Console.WriteLine("\n Valid");
-            }
-            else
-                Console.WriteLine("\n Invalid");
+            User_Registration User = new User_Registration();
+            User.Registration();
             Console.ReadKey();
         }
     }
