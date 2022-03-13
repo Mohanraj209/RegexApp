@@ -14,6 +14,7 @@ namespace RegexApp
         public static string email_Pattern = @"^[A-Za-z0-9]{3,}([\.\-\+][A-Za-z0-9]{3,})?[@][a-zA-Z0-9]{1,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2,})?$";
         public static string mobile_Pattern = "^[0-9]{2}[ ][0-9]{10}$";
         public static string password_PatternR4 = "^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[@#$&*.!?]).{8,}$";
+        public static string sampleEmail_Pattern = "^[0-9a-zA-Z]+[.+-_]{0,1}[0-9a-zA-Z]+[@][a-zA-Z0-9]+[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3}){0,1}$";
         public static string ValidateFirstName(string Name)
 		{
 			if (Regex.IsMatch(Name, firstname_Pattern))
@@ -54,13 +55,32 @@ namespace RegexApp
                 return "Password is Invalid";
         }
 
+        public static void SampleEmail()
+        {
+            string[] sampleEmail ={"abc@yahoo.com","abc-100@yahoo.com","abc.100@yahoo.com","abc-100@abc.net","abc111@abc.com","abc+100@gmail.com",
+                                   "abc.100@abc.com.au","abc@1.com","abc@gmail.com.com","abc","abc@.com.my","abc123@gmail.a","abc123@.com",
+                                   "abc123@.com.com",".abc@abc.com","abc()*@gmail.com","abc@%*.com","abc.@gmail.com","abc@gmail.com.1a",
+                                   "abc@gmail.com.aa.au","abc..2002@gmail.com"};
+            Console.WriteLine("Validate Sample Email Id");
+            Validate(sampleEmail, sampleEmail_Pattern);
+        }
+        public static void Validate(string[] arr, string pattern)
+        {
+            foreach (var item in arr)
+            {
+                if (Regex.IsMatch(item, pattern))
+                    Console.WriteLine(item + " \t\t " + "Valid Email");
+                else
+                    Console.WriteLine(item + " \t\t " + "InValid Email");
+            }
+        }
         public void Registration()
         {
             bool Continue = true;
             while (Continue)
             {
                 Console.WriteLine("Choose Option");
-                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n4 = Mobile Number\n5 = Password\n0=Exit");
+                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n4 = Mobile Number\n5 = Password\n6 = Sample_Mail check\n0=Exit");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
@@ -91,6 +111,9 @@ namespace RegexApp
                         Console.WriteLine("\nEnter Password");
                         string password = Console.ReadLine();
                         Console.WriteLine(ValidatePassword(password));
+                        break;
+                    case 6:
+                        SampleEmail();
                         break;
                     default:
                         Console.WriteLine("\nEnter Correct Option!");
