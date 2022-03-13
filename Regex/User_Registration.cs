@@ -13,6 +13,7 @@ namespace RegexApp
 		public static string lastName_Pattern = "^[A-Z]{1}[a-z]{2}$";
         public static string email_Pattern = @"^[A-Za-z0-9]{3,}([\.\-\+][A-Za-z0-9]{3,})?[@][a-zA-Z0-9]{1,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2,})?$";
         public static string mobile_Pattern = "^[0-9]{2}[ ][0-9]{10}$";
+        public static string password_PatternR1 = "^[a-zA-Z0-9]{8}";
         public static string ValidateFirstName(string Name)
 		{
 			if (Regex.IsMatch(Name, firstname_Pattern))
@@ -45,13 +46,21 @@ namespace RegexApp
                 return "Mobile number is Invalid";
         }
 
+        public static string ValidatePassword(string password)
+        {
+            if (Regex.IsMatch(password, password_PatternR1))
+                return "Password is valid";
+            else
+                return "Password is Invalid";
+        }
+
         public void Registration()
         {
             bool Continue = true;
             while (Continue)
             {
                 Console.WriteLine("Choose Option");
-                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n4 = Mobile Number\n0=Exit");
+                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n4 = Mobile Number\n5 = Password\n0=Exit");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
@@ -77,6 +86,11 @@ namespace RegexApp
                         Console.WriteLine("\nEnter Mobile number");
                         string Mobile_Num = Console.ReadLine();
                         Console.WriteLine(ValidateMobileNumber(Mobile_Num));
+                        break;
+                    case 5:
+                        Console.WriteLine("\nEnter Password");
+                        string password = Console.ReadLine();
+                        Console.WriteLine(ValidatePassword(password));
                         break;
                     default:
                         Console.WriteLine("\nEnter Correct Option!");
