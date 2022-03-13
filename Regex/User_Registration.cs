@@ -11,7 +11,8 @@ namespace RegexApp
 	{
 		public static string firstname_Pattern = "^([A-Z]*[a-z]*){2,}$";
 		public static string lastName_Pattern = "^[A-Z]{1}[a-z]{2}$";
-		public static string ValidateFirstName(string Name)
+        public static string email_Pattern = @"^[A-Za-z0-9]{3,}([\.\-\+][A-Za-z0-9]{3,})?[@][a-zA-Z0-9]{1,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2,})?$";
+        public static string ValidateFirstName(string Name)
 		{
 			if (Regex.IsMatch(Name, firstname_Pattern))
 				return "First Name is Valid";
@@ -27,13 +28,21 @@ namespace RegexApp
 				return "Last Name is Invalid";
 		}
 
+        public static string ValidateEmailID(string Mail)
+        {
+            if (Regex.IsMatch(Mail, email_Pattern))
+                return "E-Mail is Valid";
+            else
+                return "E-Mail is Invalid";
+        }
+
         public void Registration()
         {
             bool Continue = true;
             while (Continue)
             {
                 Console.WriteLine("Choose Option");
-                Console.WriteLine("1 = First Name\n2 = Last Name\n0=Exit");
+                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n0=Exit");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
@@ -45,11 +54,12 @@ namespace RegexApp
                         string firstName = Console.ReadLine();
                         Console.WriteLine(ValidateFirstName(firstName));
                         break;
-                    case 2:
-                        Console.WriteLine("\nEnter Last Name");
-                        string lastName = Console.ReadLine();
-                        Console.WriteLine(ValidateLastName(lastName));
+                    case 3:
+                        Console.WriteLine("\nEnter E-Mail");
+                        string Mail = Console.ReadLine();
+                        Console.WriteLine(ValidateEmailID(Mail));
                         break;
+
                     default:
                         Console.WriteLine("\nEnter Correct Option!");
                         break;
