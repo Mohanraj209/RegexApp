@@ -13,7 +13,7 @@ namespace RegexApp
 		public static string lastName_Pattern = "^[A-Z]{1}[a-z]{2}$";
         public static string email_Pattern = @"^[A-Za-z0-9]{3,}([\.\-\+][A-Za-z0-9]{3,})?[@][a-zA-Z0-9]{1,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2,})?$";
         public static string mobile_Pattern = "^[0-9]{2}[ ][0-9]{10}$";
-        public static string password_PatternR1 = "^[a-zA-Z0-9]{8}";
+        public static string password_PatternR2 = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).{8,}$";
         public static string ValidateFirstName(string Name)
 		{
 			if (Regex.IsMatch(Name, firstname_Pattern))
@@ -48,7 +48,7 @@ namespace RegexApp
 
         public static string ValidatePassword(string password)
         {
-            if (Regex.IsMatch(password, password_PatternR1))
+            if (Regex.IsMatch(password, password_PatternR2))
                 return "Password is valid";
             else
                 return "Password is Invalid";
