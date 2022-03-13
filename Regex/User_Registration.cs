@@ -12,6 +12,7 @@ namespace RegexApp
 		public static string firstname_Pattern = "^([A-Z]*[a-z]*){2,}$";
 		public static string lastName_Pattern = "^[A-Z]{1}[a-z]{2}$";
         public static string email_Pattern = @"^[A-Za-z0-9]{3,}([\.\-\+][A-Za-z0-9]{3,})?[@][a-zA-Z0-9]{1,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2,})?$";
+        public static string mobile_Pattern = "^[0-9]{2}[ ][0-9]{10}$";
         public static string ValidateFirstName(string Name)
 		{
 			if (Regex.IsMatch(Name, firstname_Pattern))
@@ -36,13 +37,21 @@ namespace RegexApp
                 return "E-Mail is Invalid";
         }
 
+        public static string ValidateMobileNumber(string Number)
+        {
+            if (Regex.IsMatch(Number, mobile_Pattern))
+                return "Mobile number is valid";
+            else
+                return "Mobile number is Invalid";
+        }
+
         public void Registration()
         {
             bool Continue = true;
             while (Continue)
             {
                 Console.WriteLine("Choose Option");
-                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n0=Exit");
+                Console.WriteLine("1 = First Name\n2 = Last Name\n3 = Mail-ID\n4 = Mobile Number\n0=Exit");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
@@ -54,12 +63,21 @@ namespace RegexApp
                         string firstName = Console.ReadLine();
                         Console.WriteLine(ValidateFirstName(firstName));
                         break;
+                    case 2:
+                        Console.WriteLine("\nEnter Last Name");
+                        string lastName = Console.ReadLine();
+                        Console.WriteLine(ValidateFirstName(lastName));
+                        break;
                     case 3:
                         Console.WriteLine("\nEnter E-Mail");
                         string Mail = Console.ReadLine();
                         Console.WriteLine(ValidateEmailID(Mail));
                         break;
-
+                    case 4:
+                        Console.WriteLine("\nEnter Mobile number");
+                        string Mobile_Num = Console.ReadLine();
+                        Console.WriteLine(ValidateMobileNumber(Mobile_Num));
+                        break;
                     default:
                         Console.WriteLine("\nEnter Correct Option!");
                         break;
